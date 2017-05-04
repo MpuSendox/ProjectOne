@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+xmlns:p="http://primefaces.org/ui"
+xmlns:h="http://java.sun.com/jsf/html"
+xmlns:f="http://java.sun.com/jsf/core"
+xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+</h:head>
+<h:body>
+<h:form id="form">
+<p:fragment autoUpdate="true">
+<p:contextMenu for="listCust">
+	<p:menuitem value="Update" process="listCust" update=":form:custForm" actionListener="#{customerMb.modeEdit}" oncomplete="PF('custFormDialog').show()" icon="ui-icon-pencil"/>
+	<p:menuitem value="Delete" process="listCust" update=":form:custForm" actionListener="#{customerMb.modeDelete}" oncomplete="PF('custFormDialog').show()" icon="ui-icon-trash"/>
+</p:contextMenu>
+</p:fragment>
+<p:dataTable id="listCust" widgetVar="listCust" value="#{customerMb.custAktif}" var="cL" paginator="true" editable="true" emptyMessage="Data kosong" 
+paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+rowsPerPageTemplate="5,10,15" rows="5" selectionMode="single" selection="#{customerMb.customer}" rowKey="#{cL.kodeCustomer}">
+	<f:facet name="header">List Customer</f:facet>
+	
+	<p:ajax listener="#{customerMb.editRow}" event="rowEdit" update=":form:listCust" />
+	
+	<p:column headerText="Kode Customer" sortBy="#{cL.kodeCustomer}" filterBy="#{cL.kodeCustomer}">
+		<p:cellEditor>
+			<f:facet name="output"><h:outputText value="#{cL.kodeCustomer}"/></f:facet>
+			<f:facet name="input"><p:inputText value="#{cL.kodeCustomer}" readonly="true"/></f:facet>
+		</p:cellEditor>
+	</p:column>
+	<p:column headerText="Nama Customer" sortBy="#{cL.namaCustomer}" filterBy="#{cL.namaCustomer}">
+		<p:cellEditor>
+			<f:facet name="output"><h:outputText value="#{cL.namaCustomer}"/></f:facet>
+			<f:facet name="input"><p:inputText value="#{cL.namaCustomer}" style="width:100%"/></f:facet>
+		</p:cellEditor>
+	</p:column>
+	<p:column headerText="Alamat Customer" sortBy="#{cL.alamatCustomer}" filterBy="#{cL.alamatCustomer}">
+		<p:cellEditor>
+			<f:facet name="output"><h:outputText value="#{cL.alamatCustomer}"/></f:facet>
+			<f:facet name="input"><p:inputText value="#{cL.alamatCustomer}" style="width:100%"/></f:facet>
+		</p:cellEditor>
+	</p:column>
+	<p:column headerText="Tanggal Lahir" sortBy="#{cL.tglLahir}" filterBy="#{cL.tglLahir}">
+		<p:cellEditor>
+			<f:facet name="output">
+				<h:outputText value="#{cL.tglLahir}">
+					<f:convertDateTime pattern="dd MMM, yyyy" locale="in_ID" timeZone="GMT+7"/>
+				</h:outputText>
+			</f:facet>
+			<f:facet name="input"><p:calendar value="#{cL.tglLahir}" maxdate="#{customerMb.dNow}" pattern="dd/MMM/yyyy" locale="in_ID"/></f:facet>
+		</p:cellEditor>
+	</p:column>
+	<p:column headerText="Status Customer">
+		<h:outputText value="#{cL.statusCust}"/>
+	</p:column>
+	<p:column headerText="Status Hutang">
+		<h:outputText value="#{cL.statusHut}"/>
+	</p:column>
+	<p:column headerText="Total Hutang">
+		<h:outputText value="#{cL.totalHutang}">
+			<f:convertNumber locale="in_ID" currencySymbol="Rp." type="currency"/>
+		</h:outputText>
+	</p:column>
+	<p:column style="width:32px">
+		<p:rowEditor />
+	</p:column>
+</p:dataTable>
+<p:fragment autoUpdate="true">
+	<p:commandButton value="Add Customer" update=":form:custForm" actionListener="#{customerMb.modeInsert}" oncomplete="PF('custFormDialog').show()" icon="ui-icon-plus"/>
+	</p:fragment>
+<p:dialog widgetVar="custFormDialog" header="Customer">
+	<p:outputPanel id="custForm" style="text-align:center">
+		<center>
+            <p:growl for="saveButton" life="5000" id="growl"/>
+			<p:panelGrid columns="2">
+				<f:facet name="header">Customer</f:facet>
+				<h:outputLabel value="Mode :"/>
+				<h:outputLabel value="#{customerMb.act}"/>
+				<h:outputLabel value="Kode Customer :" />
+				<p:inputText id="kodeCust" value="#{customerMb.customer.kodeCustomer}" disabled="#{customerMb.dis}" readonly="true"/>
+				<h:outputLabel value="Nama Customer :" />
+				<p:inputText value="#{customerMb.customer.namaCustomer}" maxlength="100" required="true" requiredMessage="Nama harus diisi" disabled="#{customerMb.dis}"/>
+				<h:outputLabel value="Alamat Customer :" />
+				<p:inputTextarea value="#{customerMb.customer.alamatCustomer}" maxlength="200" required="true" requiredMessage="Alamat harus diisi" disabled="#{customerMb.dis}"/>
+				<h:outputLabel value="Tanggal Lahir :" />
+				<p:calendar value="#{customerMb.customer.tglLahir}" maxdate="#{customerMb.dNow}" pattern="dd/MMM/yyyy" locale="en" disabled="#{customerMb.dis}"/>
+				<f:facet name="footer">
+					<p:commandButton id="saveButton" update=":form:listCust" value="#{customerMb.act}" icon="ui-icon-check" action="#{customerMb.manipCustomer}" oncomplete="PF('custFormDialog').hide()"/>
+					<p:commandButton value="Cancel" styleClass="ui-confirmdialog-no" icon="ui-icon-close" oncomplete="PF('custFormDialog').hide()"/>
+				</f:facet>
+			</p:panelGrid>
+            </center>
+	</p:outputPanel>
+</p:dialog>
+</h:form>
+</h:body>
+</html>

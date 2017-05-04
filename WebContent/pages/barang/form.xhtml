@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+xmlns:p="http://primefaces.org/ui"
+xmlns:h="http://java.sun.com/jsf/html"
+xmlns:f="http://java.sun.com/jsf/core"
+xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+</h:head>
+<h:body>
+<h:form>
+<p:growl id="growl" life="5000" />
+<p:panelGrid columns="2">
+	<f:facet name="header">Form Barang</f:facet>
+	<h:outputLabel value="Kode Barang :" />
+	<p:inputText id="kodeBarang" value="#{barangMb.barang.kodeBarang}" readonly="#{barangMb.ro}" required="true" requiredMessage="Kode Barang tidak boleh kosong"/>
+	<h:outputLabel value="Nama Barang :" />
+	<p:inputText value="#{barangMb.barang.namaBarang}"/>
+	<h:outputLabel value="Status Barang :" />
+	<p:selectOneMenu value="#{barangMb.barang.statusBarang}" required="true" requiredMessage="Status Barang harus dipilih">
+		<f:selectItem itemLabel="-- Pilih Status Barang --" itemValue="" noSelectionOption="true" />
+		<f:selectItem itemLabel="Tersedia" itemValue="5"/>
+		<f:selectItem itemLabel="Habis" itemValue="6"/>
+	</p:selectOneMenu>
+	<h:outputLabel value="Harga Barang :" />
+	<p:inputText value="#{barangMb.barang.hargaBarang}"/>
+
+	<f:facet name="footer">
+		<p:commandButton update="growl" value="Save" icon="ui-icon-check" action="#{barangMb.manipBarang}" actionListener="#{navigation.listBarang}" ajax="false"/>
+	</f:facet>
+</p:panelGrid>
+</h:form>
+</h:body>
+</html>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	<title>Aplikasi Gudang</title>
+</h:head>
+<body>
+	<p:layout style="min-width:1024px; min-height:600px">
+		<p:layoutUnit position="north" style="text-align:center">
+				<f:facet name="header">Aplikasi Gudang</f:facet>
+		</p:layoutUnit>
+		<p:layoutUnit position="west">
+			<f:facet name="header">Main Menu</f:facet>
+			<img src="Assets/img/gudang.jpg" width="258px" height="150px"/>
+			<ui:include src="/menu.xhtml" />
+		</p:layoutUnit>
+		<p:layoutUnit position="center">
+			<ui:include src="#{navigation.urlPage}" />
+		</p:layoutUnit>
+		<p:layoutUnit position="south" style="text-align:center">
+				<f:facet name="footer"><marquee behavior="alternate" scrollamount="5">XSIS Java Bootcamp64, Copyright © 2015. All rights reserved.</marquee></f:facet>
+		</p:layoutUnit>
+	</p:layout>
+</body>
+</html>

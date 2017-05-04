@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+xmlns:p="http://primefaces.org/ui"
+xmlns:h="http://java.sun.com/jsf/html"
+xmlns:f="http://java.sun.com/jsf/core"
+xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+</h:head>
+<h:body>
+<h:form>
+<p:growl id="growl" life="5000" />
+<p:panelGrid columns="2">
+	<f:facet name="header">Form Customer</f:facet>
+	<h:outputLabel value="Kode Customer :" />
+	<p:inputText id="kodeCust" value="#{customerMb.customer.kodeCustomer}" readonly="true"/>
+	<h:outputLabel value="Nama Customer :" />
+	<p:inputText value="#{customerMb.customer.namaCustomer}" maxlength="100" required="true" requiredMessage="Nama harus diisi"/>
+	<h:outputLabel value="Alamat Customer :" />
+	<p:inputTextarea value="#{customerMb.customer.alamatCustomer}" maxlength="200" required="true" requiredMessage="Alamat harus diisi"/>
+	<h:outputLabel value="Tanggal Lahir :" />
+	<p:calendar value="#{customerMb.customer.tglLahir}" maxdate="#{customerMb.dNow}" pattern="dd/MMM/yyyy" locale="en">
+		<p:ajax event="blur" update="umur" listener="#{customerMb.umurTotal}"/>
+	</p:calendar>
+	<h:outputLabel value="Umur :" />
+	<h:outputLabel value="#{customerMb.umur}" id="umur"/>
+	<f:facet name="footer">
+		<p:commandButton value="Save" icon="ui-icon-check" action="#{customerMb.manipCustomer}" actionListener="#{navigation.listCustomer}" ajax="false"/>
+	</f:facet>
+</p:panelGrid>
+</h:form>
+</h:body>
+</html>

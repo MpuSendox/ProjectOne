@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+xmlns:p="http://primefaces.org/ui"
+xmlns:h="http://java.sun.com/jsf/html"
+xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+</h:head>
+<h:body>
+	<h:form>
+		<p:slideMenu style="width:250px">
+		<p:menuitem value="Home" actionListener="#{navigation.home}" icon="ui-icon-home" ajax="false"/>
+		<p:separator/>
+        <p:submenu label="Customer" icon="ui-icon-person">
+        	<p:menuitem value="List" actionListener="#{navigation.listCustomer}" icon="ui-icon-document" ajax="false"/>
+        </p:submenu>
+        <p:submenu label="Barang" icon="ui-icon-suitcase">
+            <p:menuitem value="List" actionListener="#{navigation.listBarang}" icon="ui-icon-document" ajax="false"/>
+            <p:menuitem value="Add" actionListener="#{navigation.formBarang}" action="#{barangMb.modeInsert}" icon="ui-icon-plus" ajax="false"/>
+        </p:submenu>
+        <p:submenu label="Penjualan" icon="ui-icon-cart">
+            <p:menuitem value="List" actionListener="#{navigation.listPenjualan}" icon="ui-icon-document" ajax="false"/>
+            <p:menuitem value="Add" actionListener="#{navigation.formPenjualan}" action="#{penjualanMb.modeInsert}" icon="ui-icon-plus" ajax="false"/>
+        </p:submenu>
+        <p:separator/>
+        <p:submenu label="Hutang" icon="ui-icon-clipboard">
+            <p:menuitem value="Pelunasan" actionListener="#" icon="ui-icon-minus" />
+            <p:menuitem value="Peminjaman" actionListener="#" icon="ui-icon-plus" />
+        </p:submenu>
+    </p:slideMenu>
+	</h:form>
+</h:body>
+</html>

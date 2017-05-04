@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+xmlns:p="http://primefaces.org/ui"
+xmlns:h="http://java.sun.com/jsf/html"
+xmlns:f="http://java.sun.com/jsf/core"
+xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+</h:head>
+<h:body>
+<h:form>
+<p:contextMenu for="listPenjualan">
+	<p:menuitem value="Add" action="#{navigation.formPenjualan}" actionListener="#{penjualanMb.modeInsert}" icon="ui-icon-plus" ajax="false"/>
+	<p:menuitem value="Update" action="#{navigation.formPenjualan}" actionListener="#{penjualanMb.modeEdit}" icon="ui-icon-pencil" ajax="false"/>
+</p:contextMenu>
+<p:dataTable id="listPenjualan" value="#{penjualanMb.penjList}" var="pL" paginator="true" emptyMessage="Data kosong" 
+paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+rowsPerPageTemplate="5,10,15" rows="5" selectionMode="single" rowKey="#{pL.kodePenjualan}" selection="#{penjualanMb.penj}" reflow="true">
+	<f:facet name="header">List Penjualan</f:facet>
+	<p:column headerText="Kode Penjualan">
+		<h:outputText value="#{pL.kodePenjualan}"/>
+	</p:column>
+	<p:column headerText="Kode Customer">
+		<h:outputText value="#{pL.kodeCustomer}"/>
+	</p:column>
+	<p:column headerText="Kode Barang">
+		<h:outputText value="#{pL.kodeBarang}"/>
+	</p:column>
+	<p:column headerText="Jumlah Barang">
+		<h:outputText value="#{pL.jumlahBarang}"/>
+	</p:column>
+	<p:column headerText="Tanggal Penjualan">
+		<h:outputText value="#{pL.tglPenjualan}">
+			<f:convertDateTime pattern="dd/MMM/yyyy" locale="en"/>
+		</h:outputText>
+	</p:column>
+	<p:column headerText="Total Harga">
+		<h:outputText value="#{pL.totalHarga}">
+			<f:convertNumber locale="in_ID" currencySymbol="Rp." type="currency"/>
+		</h:outputText>
+	</p:column>
+	<p:column headerText="Total Bayar">
+		<h:outputText value="#{pL.totalBayar}">
+			<f:convertNumber locale="in_ID" currencySymbol="Rp." type="currency"/>
+		</h:outputText>
+	</p:column>
+</p:dataTable>
+</h:form>
+</h:body>
+</html>
