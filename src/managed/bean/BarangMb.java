@@ -1,12 +1,13 @@
 package managed.bean;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import service.BarangService;
@@ -21,14 +22,14 @@ public class BarangMb implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private Collection<Barang> barangList;
-	private Collection<Barang> barangStok;
+	private List<Barang> barangList = new ArrayList<Barang>();
+	private List<Barang> barangStok = new ArrayList<Barang>();
 	private Barang barang = new Barang();
-	@Autowired private BarangService barangService;
+	private BarangService barangService = new BarangService();
 	private String act;
 	private String ro;
 	
-	public Collection<Barang> getBarangList() {
+	public List<Barang> getBarangList() {
 		try {
 			this.barangList = this.barangService.getAllBarang();
 		} catch (Exception e) {
@@ -84,7 +85,7 @@ public class BarangMb implements Serializable{
 		}
 	}
 	
-	public void setBarangList(Collection<Barang> barangList) {
+	public void setBarangList(List<Barang> barangList) {
 		this.barangList = barangList;
 	}
 	public Barang getBarang() {
@@ -106,7 +107,7 @@ public class BarangMb implements Serializable{
 		this.ro = ro;
 	}
 
-	public void setBarangStok(Collection<Barang> barangStok) {
+	public void setBarangStok(List<Barang> barangStok) {
 		this.barangStok = barangStok;
 	}
 

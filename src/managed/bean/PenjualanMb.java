@@ -1,7 +1,7 @@
 package managed.bean;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import java.util.Date;
 
 import javax.faces.application.FacesMessage;
@@ -9,12 +9,10 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
-import model.Barang;
-import model.Penjualan;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import model.Barang;
+import model.Penjualan;
 import service.BarangService;
 import service.PenjualanService;
 
@@ -27,15 +25,15 @@ public class PenjualanMb implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private Collection<Penjualan> penjList;
+	private List<Penjualan> penjList;
 	private Penjualan penj = new Penjualan();
-	@Autowired private PenjualanService penjService;
-	@Autowired private BarangService barangService;
+	private PenjualanService penjService;
+	private BarangService barangService;
 	private String act;
 	private String ro;
 	private Date dateNow = new Date();
 	
-	public Collection<Penjualan> getPenjList() {
+	public List<Penjualan> getPenjList() {
 		try {
 			this.penjList = this.penjService.getAllPenjualan();
 		} catch (Exception e) {
@@ -107,7 +105,7 @@ public class PenjualanMb implements Serializable{
 		this.penj.setTotalHarga(brg.getHargaBarang()*this.penj.getJumlahBarang());
 	}
 	
-	public void setPenjList(Collection<Penjualan> penjList) {
+	public void setPenjList(List<Penjualan> penjList) {
 		this.penjList = penjList;
 	}
 	public Penjualan getPenj() {

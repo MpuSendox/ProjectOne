@@ -1,7 +1,7 @@
 package managed.bean;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import java.util.Date;
 
 import javax.annotation.PostConstruct;
@@ -25,10 +25,10 @@ public class CustomerMb implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private Collection<Customer> custList;
-	private Collection<Customer> custAktif;
-	@Autowired private CustomerService custService;
-	@Autowired private SequenceKodeService sks;
+	private List<Customer> custList;
+	private List<Customer> custAktif;
+	private CustomerService custService;
+	private SequenceKodeService sks;
 	private String act;
 	private String dis;
 	private Customer customer = new Customer();
@@ -41,7 +41,7 @@ public class CustomerMb implements Serializable{
 		dataCustomerList();
 	}
 	
-	public Collection<Customer> getCustList() {
+	public List<Customer> getCustList() {
 		try {
 			this.custList = this.custService.getAllCustomer();
 		} catch (Exception e) {
@@ -51,7 +51,7 @@ public class CustomerMb implements Serializable{
 		return this.custList;
 	}
 	
-	public Collection<Customer> getCustAktif() {
+	public List<Customer> getCustAktif() {
 		return this.custAktif;
 	}
 	
@@ -133,7 +133,7 @@ public class CustomerMb implements Serializable{
 		}
 	}
 	
-	public void setCustList(Collection<Customer> custList) {
+	public void setCustList(List<Customer> custList) {
 		this.custList = custList;
 	}
 	public Customer getCustomer() {
@@ -159,7 +159,7 @@ public class CustomerMb implements Serializable{
 		this.dNow = dNow;
 	}
 
-	public void setCustAktif(Collection<Customer> custAktif) {
+	public void setCustAktif(List<Customer> custAktif) {
 		this.custAktif = custAktif;
 	}
 
