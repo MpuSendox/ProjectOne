@@ -9,7 +9,6 @@ import org.springframework.stereotype.Component;
 
 @ManagedBean
 @ViewScoped
-@Component
 public class Navigation implements Serializable {
 	/**
 	 * 

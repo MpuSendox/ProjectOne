@@ -19,7 +19,6 @@ import service.SequenceKodeService;
 
 @ManagedBean
 @ViewScoped
-@Component
 public class CustomerMb implements Serializable{
 	/**
 	 * 

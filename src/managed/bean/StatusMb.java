@@ -13,7 +13,6 @@ import util.Status;
 
 @ManagedBean
 @ViewScoped
-@Component
 public class StatusMb implements Serializable{
 
 	/**

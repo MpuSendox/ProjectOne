@@ -1,16 +1,27 @@
 package service;
 
 import java.util.List;
+
+import javax.sql.DataSource;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import util.ConfigPool;
 import dao.BarangDao;
 import model.Barang;
 
 @Transactional
 @Service
 public class BarangService {
+	private ConfigPool configPool = new ConfigPool();
+	private DataSource dataSource;
 	private BarangDao barangDao;
+	
+	public BarangService(){
+		dataSource = configPool.getDataSource();
+		barangDao = new BarangDao(dataSource);
+	}
 
 	public List<Barang> getAllBarang() throws Exception {
 		return this.barangDao.getAllBarang();

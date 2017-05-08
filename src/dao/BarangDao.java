@@ -4,12 +4,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
-import javax.annotation.PostConstruct;
 import javax.sql.DataSource;
 
 import model.Barang;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
@@ -17,14 +15,14 @@ import org.springframework.stereotype.Repository;
 import dao.BarangDao;
 @Repository
 public class BarangDao {
-	@Autowired private DataSource dataSource;
-	
 	private JdbcTemplate jdbcTemplate;
 	
-	@PostConstruct
-	public void init() {
-        this.jdbcTemplate = new JdbcTemplate(dataSource);
-        this.jdbcTemplate.afterPropertiesSet();
+	public BarangDao(){
+		
+	}
+	
+	public BarangDao(DataSource datasource) {
+        this.jdbcTemplate = new JdbcTemplate(datasource);
     }
 	
 	public List<Barang> getAllBarang() throws Exception {

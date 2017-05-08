@@ -18,7 +18,6 @@ import service.PenjualanService;
 
 @ManagedBean
 @ViewScoped
-@Component
 public class PenjualanMb implements Serializable{
 
 	/**

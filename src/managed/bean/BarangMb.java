@@ -15,7 +15,6 @@ import model.Barang;
 
 @ManagedBean
 @ViewScoped
-@Component
 public class BarangMb implements Serializable{
 
 	/**
